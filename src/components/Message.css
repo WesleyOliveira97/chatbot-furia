@@ -1,0 +1,120 @@
+.message {
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.message-content {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.75rem;
+  max-width: 80%;
+}
+
+.message.user .message-content {
+  margin-left: auto;
+  flex-direction: row-reverse;
+}
+
+.message.bot .message-content {
+  margin-right: auto;
+}
+
+.bot-avatar,
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+
+.bot-avatar {
+  background: linear-gradient(135deg, #000000, #333333);
+  color: #ffffff;
+  border: 2px solid #555;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+.user-avatar {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: #ffffff;
+  border: 2px solid #66BB6A;
+}
+
+.message-bubble {
+  position: relative;
+  padding: 0.75rem 1rem;
+  border-radius: 18px;
+  max-width: 100%;
+  word-wrap: break-word;
+  animation: messageSlideIn 0.3s ease-out;
+}
+
+.message.bot .message-bubble {
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  color: #ffffff;
+  border: 1px solid #444;
+  border-bottom-left-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.message.user .message-bubble {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: #ffffff;
+  border-bottom-right-radius: 6px;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.message-text {
+  margin: 0;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.message-time {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.7;
+  margin-top: 0.25rem;
+  text-align: right;
+}
+
+.message.bot .message-time {
+  text-align: left;
+}
+
+@keyframes messageSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .message-content {
+    max-width: 90%;
+  }
+  
+  .bot-avatar,
+  .user-avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+  
+  .message-bubble {
+    padding: 0.6rem 0.8rem;
+  }
+  
+  .message-text {
+    font-size: 0.9rem;
+  }
+}
