@@ -1,9 +1,9 @@
 .chat-container {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 140px);
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 1rem auto;
   background: #1a1a1a;
   border-radius: 12px;
   overflow: hidden;
@@ -38,11 +38,11 @@
 
 @media (max-width: 768px) {
   .chat-container {
-    height: calc(100vh - 140px);
-    margin: 0 1rem;
+    height: calc(100vh - 180px);
+    margin: 0.5rem;
     border-radius: 8px;
   }
-  
+
   .chat-content {
     padding: 0.5rem;
   }

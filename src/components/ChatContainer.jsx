@@ -2,9 +2,10 @@ import { useState, useEffect, useRef } from 'react'
 import MessageList from './MessageList'
 import MessageInput from './MessageInput'
 import TypingIndicator from './TypingIndicator'
+import LoginPrompt from './LoginPrompt'
 import './ChatContainer.css'
 
-function ChatContainer() {
+function ChatContainer({ isLoggedIn }) {
   const [messages, setMessages] = useState([
     {
       id: 1,
@@ -77,6 +78,15 @@ function ChatContainer() {
     }
     
     return "Interessante! Como assistente da FURIA, posso te ajudar com informações sobre nossos jogadores, partidas, estatísticas e história da equipe. O que você gostaria de saber? 🔥"
+  }
+
+  // Show login prompt if user is not logged in
+  if (!isLoggedIn) {
+    return (
+      <div className="chat-container">
+        <LoginPrompt />
+      </div>
+    )
   }
 
   return (

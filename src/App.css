@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.app > .chat-container {
+  flex: 1;
+}
+
 * {
   box-sizing: border-box;
 }

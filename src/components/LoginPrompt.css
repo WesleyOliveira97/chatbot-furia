@@ -1,0 +1,195 @@
+.login-prompt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  padding: 2rem;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0f0f0f 100%);
+}
+
+.login-prompt-content {
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  border: 1px solid #444;
+  border-radius: 16px;
+  padding: 3rem 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  animation: slideInUp 0.6s ease-out;
+}
+
+.furia-icon {
+  margin-bottom: 1.5rem;
+}
+
+.icon-text {
+  font-size: 4rem;
+  display: block;
+  animation: pulse 2s infinite;
+}
+
+.prompt-title {
+  color: #ffffff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.prompt-description {
+  color: #cccccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin: 0 0 2rem 0;
+  opacity: 0.9;
+}
+
+.prompt-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, #333333, #2a2a2a);
+  border: 1px solid #555;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+  border-color: #4CAF50;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.feature-text {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+}
+
+.prompt-login-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1rem 2rem;
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  border: none;
+  border-radius: 8px;
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 2rem auto 1rem auto;
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.prompt-login-button:hover {
+  background: linear-gradient(135deg, #5CBF60, #4CAF50);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(76, 175, 80, 0.4);
+}
+
+.prompt-login-button:active {
+  transform: translateY(0);
+}
+
+.prompt-note {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 1rem 0 0 0;
+  opacity: 0.8;
+}
+
+/* Animations */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .login-prompt {
+    padding: 1rem;
+  }
+  
+  .login-prompt-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .prompt-title {
+    font-size: 1.6rem;
+  }
+  
+  .prompt-description {
+    font-size: 1rem;
+  }
+  
+  .prompt-features {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+  
+  .feature-item {
+    padding: 0.75rem;
+  }
+  
+  .feature-text {
+    font-size: 0.85rem;
+  }
+  
+  .prompt-login-button {
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+  }
+  
+  .icon-text {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .prompt-features {
+    grid-template-columns: 1fr;
+  }
+  
+  .feature-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
+  
+  .feature-text {
+    text-align: center;
+  }
+}
