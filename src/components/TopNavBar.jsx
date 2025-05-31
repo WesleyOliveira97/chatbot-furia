@@ -1,18 +1,47 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './TopNavBar.css'
 
-function TopNavBar({ isLoggedIn, user, onLogin, onLogout, onUserUpdate }) {
+function TopNavBar({ isLoggedIn, user, onLogin, onLogout, onUserUpdate, theme, onThemeChange }) {
   const [showLoginModal, setShowLoginModal] = useState(false)
   const [showPreferencesModal, setShowPreferencesModal] = useState(false)
+  const [showUserMenu, setShowUserMenu] = useState(false)
   const [loginForm, setLoginForm] = useState({ username: '', password: '' })
   const [newUsername, setNewUsername] = useState('')
+  const userMenuRef = useRef(null)
+
+  // Close user menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (userMenuRef.current && !userMenuRef.current.contains(event.target)) {
+        setShowUserMenu(false)
+      }
+    }
+
+    if (showUserMenu) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showUserMenu])
 
   const handleLoginClick = () => {
     if (isLoggedIn) {
-      onLogout()
+      setShowUserMenu(!showUserMenu)
     } else {
       setShowLoginModal(true)
     }
+  }
+
+  const handleLogout = () => {
+    onLogout()
+    setShowUserMenu(false)
+  }
+
+  const handleThemeToggle = () => {
+    onThemeChange(theme === 'dark' ? 'light' : 'dark')
+    setShowUserMenu(false)
   }
 
   const handleLoginSubmit = (e) => {
@@ -90,17 +119,6 @@ function TopNavBar({ isLoggedIn, user, onLogin, onLogout, onUserUpdate }) {
               </svg>
               Furia Store
             </button>
-
-            <button
-              className={`nav-button preferences-button ${!isLoggedIn ? 'disabled' : ''}`}
-              onClick={handlePreferencesClick}
-              disabled={!isLoggedIn}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 15.5C10.07 15.5 8.5 13.93 8.5 12C8.5 10.07 10.07 8.5 12 8.5C13.93 8.5 15.5 10.07 15.5 12C15.5 13.93 13.93 15.5 12 15.5ZM19.43 12.98C19.47 12.66 19.5 12.34 19.5 12C19.5 11.66 19.47 11.34 19.43 11.02L21.54 9.37C21.73 9.22 21.78 8.95 21.66 8.73L19.66 5.27C19.54 5.05 19.27 4.97 19.05 5.05L16.56 6.05C16.04 5.65 15.48 5.32 14.87 5.07L14.49 2.42C14.46 2.18 14.25 2 14 2H10C9.75 2 9.54 2.18 9.51 2.42L9.13 5.07C8.52 5.32 7.96 5.66 7.44 6.05L4.95 5.05C4.72 4.96 4.46 5.05 4.34 5.27L2.34 8.73C2.21 8.95 2.27 9.22 2.46 9.37L4.57 11.02C4.53 11.34 4.5 11.67 4.5 12C4.5 12.33 4.53 12.66 4.57 12.98L2.46 14.63C2.27 14.78 2.21 15.05 2.34 15.27L4.34 18.73C4.46 18.95 4.73 19.03 4.95 18.95L7.44 17.95C7.96 18.35 8.52 18.68 9.13 18.93L9.51 21.58C9.54 21.82 9.75 22 10 22H14C14.25 22 14.46 21.82 14.49 21.58L14.87 18.93C15.48 18.68 16.04 18.34 16.56 17.95L19.05 18.95C19.28 19.04 19.54 18.95 19.66 18.73L21.66 15.27C21.78 15.05 21.73 14.78 21.54 14.63L19.43 12.98Z" fill="currentColor"/>
-              </svg>
-              Preferências
-            </button>
           </div>
 
           {/* Center - FURIA Logo */}
@@ -116,15 +134,69 @@ function TopNavBar({ isLoggedIn, user, onLogin, onLogout, onUserUpdate }) {
 
           {/* Right side - Login */}
           <div className="nav-right">
-            <button
-              className={`nav-button login-button ${isLoggedIn ? 'logged-in' : ''}`}
-              onClick={handleLoginClick}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
-              </svg>
-              {isLoggedIn ? `Olá, ${user?.name}` : 'Login'}
-            </button>
+            <div className="user-menu-container" ref={userMenuRef}>
+              <button
+                className={`nav-button login-button ${isLoggedIn ? 'logged-in' : ''}`}
+                onClick={handleLoginClick}
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+                </svg>
+                {isLoggedIn ? `Olá, ${user?.name}` : 'Login'}
+                {isLoggedIn && (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7 10L12 15L17 10H7Z" fill="currentColor"/>
+                  </svg>
+                )}
+              </button>
+
+              {/* User Menu Dropdown */}
+              {isLoggedIn && showUserMenu && (
+                <div className="user-menu-dropdown">
+                  <div className="user-menu-item user-info">
+                    <span className="user-name">{user?.name}</span>
+                    <span className="user-email">{user?.username}</span>
+                  </div>
+                  <div className="user-menu-divider"></div>
+                  <button
+                    className="user-menu-item menu-button"
+                    onClick={() => {
+                      handlePreferencesClick()
+                      setShowUserMenu(false)
+                    }}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 12C14.21 12 16 10.21 16 8C16 5.79 14.21 4 12 4C9.79 4 8 5.79 8 8C8 10.21 9.79 12 12 12ZM12 14C9.33 14 4 15.34 4 18V20H20V18C20 15.34 14.67 14 12 14Z" fill="currentColor"/>
+                    </svg>
+                    Nome do Usuário
+                  </button>
+                  <button
+                    className="user-menu-item menu-button"
+                    onClick={handleThemeToggle}
+                  >
+                    {theme === 'dark' ? (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 18C8.69 18 6 15.31 6 12C6 8.69 8.69 6 12 6C15.31 6 18 8.69 18 12C18 15.31 15.31 18 12 18ZM12 16C14.21 16 16 14.21 16 12C16 9.79 14.21 8 12 8C9.79 8 8 9.79 8 12C8 14.21 9.79 16 12 16ZM11 1H13V4H11V1ZM11 20H13V23H11V20ZM3.515 4.929L4.929 3.515L7.05 5.636L5.636 7.05L3.515 4.929ZM16.95 18.364L18.364 16.95L20.485 19.071L19.071 20.485L16.95 18.364ZM19.071 3.515L20.485 4.929L18.364 7.05L16.95 5.636L19.071 3.515ZM5.636 16.95L7.05 18.364L4.929 20.485L3.515 19.071L5.636 16.95ZM23 11V13H20V11H23ZM4 11V13H1V11H4Z" fill="currentColor"/>
+                      </svg>
+                    ) : (
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.75 4.09L15.22 6.03L16.13 9.09L13.5 7.28L10.87 9.09L11.78 6.03L9.25 4.09L12.44 4L13.5 1L14.56 4L17.75 4.09ZM21.25 11L19.61 12.25L20.2 14.23L18.5 13.06L16.8 14.23L17.39 12.25L15.75 11L17.81 10.95L18.5 9L19.19 10.95L21.25 11ZM18.97 15.95C19.8 15.87 20.69 17.05 20.16 17.8C19.84 18.25 19.5 18.67 19.08 19.07C15.17 23 8.84 23 4.94 19.07C1.03 15.17 1.03 8.83 4.94 4.93C5.34 4.53 5.76 4.17 6.21 3.85C6.96 3.32 8.14 4.21 8.06 5.04C7.79 7.9 8.75 10.87 10.95 13.06C13.14 15.26 16.1 16.22 18.97 15.95Z" fill="currentColor"/>
+                      </svg>
+                    )}
+                    {theme === 'dark' ? 'Tema Claro' : 'Tema Escuro'}
+                  </button>
+                  <button
+                    className="user-menu-item menu-button logout-button"
+                    onClick={handleLogout}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M17 7L15.59 8.41L18.17 11H8V13H18.17L15.59 15.59L17 17L22 12L17 7ZM4 5H12V3H4C2.9 3 2 3.9 2 5V19C2 20.1 2.9 21 4 21H12V19H4V5Z" fill="currentColor"/>
+                    </svg>
+                    Sair
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </nav>
@@ -178,7 +250,7 @@ function TopNavBar({ isLoggedIn, user, onLogin, onLogout, onUserUpdate }) {
         <div className="login-modal-overlay" onClick={() => setShowPreferencesModal(false)}>
           <div className="login-modal" onClick={(e) => e.stopPropagation()}>
             <div className="login-modal-header">
-              <h2>Preferências</h2>
+              <h2>Nome do Usuário</h2>
               <button
                 className="close-button"
                 onClick={() => setShowPreferencesModal(false)}

@@ -36,6 +36,16 @@
   background: #777;
 }
 
+/* Light Theme Styles */
+.light .chat-container {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+}
+
+.light .chat-content {
+  background: #ffffff;
+}
+
 @media (max-width: 768px) {
   .chat-container {
     height: calc(100vh - 180px);

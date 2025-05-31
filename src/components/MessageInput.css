@@ -16,8 +16,8 @@
 }
 
 .input-wrapper:focus-within {
-  border-color: #4CAF50;
-  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+  border-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1);
 }
 
 .message-input {
@@ -52,8 +52,8 @@
 }
 
 .send-button {
-  background: linear-gradient(135deg, #4CAF50, #45a049);
-  border: none;
+  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  border: 1px solid #cccccc;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -62,14 +62,14 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  color: #ffffff;
+  color: #000000;
   flex-shrink: 0;
 }
 
 .send-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #45a049, #4CAF50);
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .send-button:active:not(:disabled) {
@@ -98,6 +98,54 @@
 .hint {
   font-size: 0.75rem;
   color: #666;
+}
+
+/* Light Theme Styles */
+.light .message-input-container {
+  background: #ffffff;
+}
+
+.light .input-wrapper {
+  background: #ffffff;
+  border: 1px solid #d0d0d0;
+}
+
+.light .input-wrapper:focus-within {
+  border-color: #000000;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+}
+
+.light .message-input {
+  background: #ffffff;
+  border-top: 1px solid #e0e0e0;
+  color: #000000;
+}
+
+.light .message-input::placeholder {
+  color: #999999;
+}
+
+.light .send-button {
+  background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+  border: 1px solid #d0d0d0;
+  color: #000000;
+}
+
+.light .send-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #e0e0e0, #d0d0d0);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.light .send-button:disabled {
+  background: #cccccc;
+}
+
+.light .char-count {
+  color: #666666;
+}
+
+.light .hint {
+  color: #888888;
 }
 
 @media (max-width: 768px) {

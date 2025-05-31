@@ -65,8 +65,8 @@
 
 .feature-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
-  border-color: #4CAF50;
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+  border-color: #ffffff;
 }
 
 .feature-icon {
@@ -135,6 +135,44 @@
   50% {
     transform: scale(1.1);
   }
+}
+
+/* Light Theme Styles */
+.light .login-prompt {
+  background: linear-gradient(180deg, #f8f8f8 0%, #ffffff 100%);
+}
+
+.light .login-prompt-content {
+  background: linear-gradient(135deg, #ffffff, #f8f8f8);
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.light .prompt-title {
+  color: #000000;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.light .prompt-description {
+  color: #333333;
+}
+
+.light .feature-item {
+  background: linear-gradient(135deg, #f5f5f5, #ffffff);
+  border: 1px solid #e0e0e0;
+}
+
+.light .feature-item:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: #000000;
+}
+
+.light .feature-text {
+  color: #000000;
+}
+
+.light .prompt-note {
+  color: #666666;
 }
 
 /* Mobile Responsive */
