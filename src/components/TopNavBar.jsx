@@ -106,7 +106,11 @@ function TopNavBar({ isLoggedIn, user, onLogin, onLogout, onUserUpdate }) {
           {/* Center - FURIA Logo */}
           <div className="nav-center">
             <div className="furia-logo">
-              <span className="logo-text">FURIA</span>
+              <img
+                src="/images/furia-logo.png"
+                alt="FURIA Logo"
+                className="logo-image"
+              />
             </div>
           </div>
 

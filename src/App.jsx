@@ -30,7 +30,7 @@ function App() {
         onLogout={handleLogout}
         onUserUpdate={handleUserUpdate}
       />
-      <ChatContainer isLoggedIn={isLoggedIn} />
+      <ChatContainer isLoggedIn={isLoggedIn} user={user} />
     </div>
   )
 }

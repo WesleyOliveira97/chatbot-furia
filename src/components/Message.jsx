@@ -1,11 +1,27 @@
 import './Message.css'
 
-function Message({ message }) {
+function Message({ message, user }) {
   const formatTime = (timestamp) => {
     return new Date(timestamp).toLocaleTimeString('pt-BR', {
       hour: '2-digit',
       minute: '2-digit'
     })
+  }
+
+  const getUserInitial = () => {
+    // First try to get from message.username (for new messages)
+    if (message.username) {
+      return message.username.charAt(0).toUpperCase()
+    }
+    // Fallback to user prop (for existing messages)
+    if (user?.name) {
+      return user.name.charAt(0).toUpperCase()
+    }
+    if (user?.username) {
+      return user.username.charAt(0).toUpperCase()
+    }
+    // Final fallback
+    return 'U'
   }
 
   return (
@@ -22,7 +38,7 @@ function Message({ message }) {
         </div>
         {message.sender === 'user' && (
           <div className="user-avatar">
-            <span className="avatar-text">U</span>
+            <span className="avatar-text">{getUserInitial()}</span>
           </div>
         )}
       </div>
