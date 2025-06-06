@@ -14,7 +14,7 @@ A modern, responsive chatbot frontend designed for Furia Counter Strike team fan
 ## 🎮 What the Bot Knows
 
 The chatbot can help with information about:
-- **Players**: Information about KSCERATO, yuurih, drop, skullz, arT
+- **Players**: Information about KSCERATO, yuurih, fallen, molodoy, YEKINDAR
 - **Matches**: Recent games and tournament information
 - **Statistics**: Team performance and player stats
 - **General**: Team history and achievements
