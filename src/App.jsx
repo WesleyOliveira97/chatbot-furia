@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import ChatContainer from './components/ChatContainer'
 import TopNavBar from './components/TopNavBar'
@@ -25,6 +25,15 @@ function App() {
   const handleThemeChange = (newTheme) => {
     setTheme(newTheme)
   }
+
+  // Update page title based on login status
+  useEffect(() => {
+    if (isLoggedIn) {
+      document.title = 'Furia Chatbot'
+    } else {
+      document.title = 'Bem vindo ao Furia Chatbot!'
+    }
+  }, [isLoggedIn])
 
   return (
     <div className={`app ${theme}`}>
